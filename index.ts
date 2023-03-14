@@ -182,17 +182,17 @@ export function configureBot(bot: RGBot) {
                     didSomething = await handleLowHealth(bot, rgctfUtils, opponents, teamMates)
                 }
 
-                if(!didSomething ) {
+                if (!didSomething) {
                     // if someone has the flag, hunt down player with flag if it isn't a team-mate
                     didSomething = await handleAttackFlagCarrier(bot, rgctfUtils, opponents, teamMates)
                 }
 
-                if(!didSomething) {
+                if (!didSomething) {
                     // do I need to attack a nearby opponent
                     didSomething = await handleAttackNearbyOpponent(bot, rgctfUtils, opponents, teamMates)
                 }
 
-                if(!didSomething) {
+                if (!didSomething) {
                     // if I have the flag, go score
                     didSomething = await handleScoringFlag(bot, rgctfUtils, opponents, teamMates)
                 }
@@ -207,12 +207,12 @@ export function configureBot(bot: RGBot) {
                     didSomething = await handlePlacingBlocks(bot, rgctfUtils, opponents, teamMates)
                 }
 
-                if( !didSomething) {
+                if (!didSomething) {
                     // see if we can find some items to loot
                     didSomething = await handleLootingItems(bot, rgctfUtils, opponents, teamMates)
                 }
 
-               if(!didSomething) {
+                if (!didSomething) {
                     // we had nothing to do ... move towards the middle
                     didSomething = await handleBotIdlePosition(bot, rgctfUtils, opponents, teamMates)
                 }
