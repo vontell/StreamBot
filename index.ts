@@ -1,9 +1,9 @@
-import {RGBot} from "rg-bot"
+import {RGBot} from 'rg-bot'
 import RGCTFUtils, {CTFEvent} from 'rg-ctf-utils'
-import {Vec3} from "vec3"
-import {Item} from "prismarine-item"
-import {Entity} from "prismarine-entity"
-import {Block} from "prismarine-block"
+import {Vec3} from 'vec3'
+import {Item} from 'prismarine-item'
+import {Entity} from 'prismarine-entity'
+import {Block} from 'prismarine-block'
 import {
     handleAttackFlagCarrier,
     handleAttackNearbyOpponent,
@@ -11,9 +11,9 @@ import {
     handleCollectingFlag,
     handleLootingItems, handleLowHealth,
     handlePlacingBlocks, handleScoringFlag
-} from "./lib/MainLoopFunctions";
+} from './lib/MainLoopFunctions';
 
-const armorManager = require("mineflayer-armor-manager")
+const armorManager = require('mineflayer-armor-manager')
 
 const {
     getUnbreakableBlockIds,
@@ -69,7 +69,7 @@ export function configureBot(bot: RGBot) {
     bot.on(CTFEvent.FLAG_OBTAINED, async (collector: string) => {
         console.log(`Flag picked up by ${collector}`)
         if (collector == bot.username()) {
-            console.log("I have the flag... yippee !!!")
+            console.log('I have the flag... yippee !!!')
         }
     })
 
@@ -78,7 +78,7 @@ export function configureBot(bot: RGBot) {
     })
 
     bot.on(CTFEvent.FLAG_AVAILABLE, async (position: Vec3) => {
-        console.log("Flag is available")
+        console.log('Flag is available')
     })
 
 
@@ -105,7 +105,7 @@ export function configureBot(bot: RGBot) {
     })
 
     bot.on('death', () => {
-        console.log("!*!*!*! I have died...")
+        console.log('!*!*!*! I have died...')
         ++mainLoopInstanceTracker
         try {
             // stop any current goal
@@ -219,7 +219,7 @@ export function configureBot(bot: RGBot) {
 
             } catch (ex) {
                 // if we get anything other than a pathfinding change error, log it so that we can fix our bot
-                if (!(ex.toString().includes("GoalChanged") || ex.toString().includes("PathStopped"))) {
+                if (!(ex.toString().includes('GoalChanged') || ex.toString().includes('PathStopped'))) {
                     console.warn(`!!!!!!!!!!!!!!!!!!!!!!!!!!!!!`)
                     console.warn(`!!!!!!!!!!!!!!!!!!!!!!!!!!!!!`)
                     console.warn(`Error during bot execution`, ex)

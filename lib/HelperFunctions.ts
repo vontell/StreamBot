@@ -1,9 +1,9 @@
-import {RGBot} from "rg-bot";
+import {RGBot} from 'rg-bot';
 
-import {Item} from "prismarine-item";
-import {Entity} from "prismarine-entity";
-import {Vec3} from "vec3";
-import {goals} from "mineflayer-pathfinder";
+import {Item} from 'prismarine-item';
+import {Entity} from 'prismarine-entity';
+import {Vec3} from 'vec3';
+import {goals} from 'mineflayer-pathfinder';
 
 /**
  * Gets the block ids for each block type that is not breakable in the arena.
@@ -167,16 +167,16 @@ export type POTION_TYPE = 'flag_carrier' | 'combat' | 'ninja' | 'health'
 function getPotionOfType(bot: RGBot, type: POTION_TYPE): Item {
     let potions = []
     switch(type) {
-        case "flag_carrier":
+        case 'flag_carrier':
             potions = FLAG_CARRIER_POTIONS;
             break;
-        case "combat":
+        case 'combat':
             potions = COMBAT_POTIONS;
             break;
-        case "ninja":
+        case 'ninja':
             potions = NINJA_POTIONS;
             break;
-        case "health":
+        case 'health':
             potions = HEALTH_POTIONS;
             break;
     }
@@ -238,11 +238,11 @@ function nameForItem(item: Item): string {
  */
 async function equipShield(bot: RGBot): Promise<boolean> {
     const shield = bot.getAllInventoryItems().find((item) => {
-        return item.displayName.includes("Shield") || item.name.includes("shield")
+        return item.displayName.includes('Shield') || item.name.includes('shield')
     })
     if (shield) {
         console.log(`[Shield] Equipping: ${shield.displayName}`)
-        await bot.mineflayer().equip(shield, "off-hand")
+        await bot.mineflayer().equip(shield, 'off-hand')
         return true
     }
     return false
@@ -254,7 +254,7 @@ async function equipShield(bot: RGBot): Promise<boolean> {
  */
 async function unEquipShield(bot: RGBot) {
     //console.log(`[Shield] Removing from slot: ${slot}`)
-    await bot.mineflayer().unequip("off-hand")
+    await bot.mineflayer().unequip('off-hand')
 }
 
 module.exports = {getUnbreakableBlockIds, nearestTeammates, moveTowardPosition, throttleRunTime, getPotionOfType, usePotion, usePotionOfType, nameForItem}

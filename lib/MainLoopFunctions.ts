@@ -1,9 +1,9 @@
-import {FindResult, RGBot} from "rg-bot";
+import {FindResult, RGBot} from 'rg-bot';
 
-import {Item} from "prismarine-item";
-import {Entity} from "prismarine-entity";
-import {Vec3} from "vec3";
-import RGCTFUtils from "rg-ctf-utils";
+import {Item} from 'prismarine-item';
+import {Entity} from 'prismarine-entity';
+import {Vec3} from 'vec3';
+import RGCTFUtils from 'rg-ctf-utils';
 
 const {
     moveTowardPosition,
@@ -151,7 +151,7 @@ export async function handlePlacingBlocks(bot: RGBot, rgctfUtils: RGCTFUtils, op
 
         if (blockInInventory) {
             console.log(`I have a '${blockInInventory.displayName}' block to place`)
-            const block_placements = myTeamName == "BLUE" ? blue_block_placements : red_block_placements
+            const block_placements = myTeamName == 'BLUE' ? blue_block_placements : red_block_placements
             for (const location of block_placements) {
                 // if I'm within 15 blocks of a place to put blocks
                 const block = bot.mineflayer().blockAt(location)
