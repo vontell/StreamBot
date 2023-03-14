@@ -181,6 +181,7 @@ export async function handlePlacingBlocks(bot: RGBot, rgctfUtils: RGCTFUtils, op
 }
 
 export async function handleLootingItems(bot: RGBot, rgctfUtils: RGCTFUtils, opponents: Entity[], teamMates: Entity[]): Promise<boolean> {
+    const myPosition = bot.position()
     const item: Item = bot.findItemsOnGround({
         maxDistance: 33,
         maxCount: 5,
