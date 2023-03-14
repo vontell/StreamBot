@@ -224,6 +224,19 @@ export function configureBot(bot: RGBot) {
         return false
     }
 
+    const placeableBlockDisplayNames = ['Gravel', 'Grass Block', 'Dirt', 'Stripped Dark Oak Wood']
+
+    const blue_block_placements = [
+        // bridge blockade
+        new Vec3(81,65,-387), new Vec3(81, 66, -387), new Vec3(81,65,-385), new Vec3(81, 66, -385)
+    ]
+
+    const red_block_placements = [
+        // bridge blockade
+        new Vec3(111,65,-387), new Vec3(111, 66, -387), new Vec3(111,65,-385), new Vec3(111, 66, -385)
+
+    ]
+
     async function handlePlacingBlocks(opponents: Entity[], teamMates: Entity[]): Promise<boolean> {
         const myPosition = bot.position()
         const myTeamName = bot.getMyTeam()
@@ -424,18 +437,5 @@ export function configureBot(bot: RGBot) {
         }
         console.log('BOT Loop End...')
     }
-
-    const placeableBlockDisplayNames = ['Gravel', 'Grass Block', 'Dirt', 'Stripped Dark Oak Wood']
-
-    const blue_block_placements = [
-        // bridge blockade
-        new Vec3(81,65,-387), new Vec3(81, 66, -387), new Vec3(81,65,-385), new Vec3(81, 66, -385)
-    ]
-
-    const red_block_placements = [
-        // bridge blockade
-        new Vec3(111,65,-387), new Vec3(111, 66, -387), new Vec3(111,65,-385), new Vec3(111, 66, -385)
-
-    ]
 
 }
