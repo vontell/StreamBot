@@ -153,11 +153,11 @@ export async function handlePlacingBlocks(bot: RGBot, rgctfUtils: RGCTFUtils, op
             console.log(`I have a '${blockInInventory.displayName}' block to place`)
             const block_placements = myTeamName == 'BLUE' ? blue_block_placements : red_block_placements
             for (const location of block_placements) {
-                // if I'm within 15 blocks of a place to put blocks
+                // if I'm within 20 blocks of a place to put blocks
                 const block = bot.mineflayer().blockAt(location)
                 const rangeSq = location.distanceSquared(myPosition)
                 console.log(`Checking for block: ${block && block.type} at rangeSq: ${rangeSq}`)
-                if (rangeSq <= 225) {
+                if (rangeSq <= 400) {
                     if (!block || block.type == 0 /*air*/) {
                         console.log(`Moving to place block '${blockInInventory.displayName}' at: ${location}`)
                         await moveTowardPosition(bot, location, 3)
