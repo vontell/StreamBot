@@ -3,7 +3,7 @@ import RGCTFUtils, {CTFEvent} from 'rg-ctf-utils'
 import {Vec3} from 'vec3'
 import {Item} from 'prismarine-item'
 import {Entity} from 'prismarine-entity'
-import {Block} from 'prismarine-block'
+
 import {
     handleAttackFlagCarrier,
     handleAttackNearbyOpponent,
