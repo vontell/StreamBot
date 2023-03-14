@@ -51,7 +51,7 @@ export async function handleAttackFlagCarrier(bot: RGBot, rgctfUtils: RGCTFUtils
 
         if (opponentWithFlag) {
             console.log(`Attacking flag carrier ${opponentWithFlag.name} at position: ${bot.vecToString(opponentWithFlag.position)}`)
-            await usePotionOfType('flag_carrier') // run faster to get them
+            await usePotionOfType('movement') // run faster to get them
             // TODO: Once I get in range of attack, should I use a combat potion ? should I equip a shield ?
             await bot.attackEntity(opponentWithFlag)
             return true

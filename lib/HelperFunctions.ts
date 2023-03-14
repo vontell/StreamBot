@@ -76,21 +76,17 @@ function nearestTeammates (bot: RGBot, maxDistance = 99, botsOnly = true): Entit
         const botName = bot.username()
         const teamName = bot.teamForPlayer(botName)
         console.log(`Checking for any team-mates in range: ${maxDistance}`)
-        let result: Entity[] = []
         if (teamName) {
             const teamMates = theMatchInfo.players.filter(player => player.team == teamName && (!botsOnly || player.isBot) && player.username != botName)
             if (teamMates && teamMates.length > 0) {
                 const myPosition = bot.position()
-                result = teamMates.map(player => {
-                    return bot.findEntities({
-                        entityNames: [player.username],
-                        attackable: true,
-                        maxDistance: maxDistance
-                    }).shift()?.result
-                }).filter((t) => t).sort((t1,t2) => (t1.position.distanceSquared(myPosition) - t2.position.distanceSquared(myPosition)))
+                return bot.findEntities({
+                    entityNames: teamMates.map(t => t.username),
+                    attackable: true,
+                    maxDistance: maxDistance
+                }).map(t => t.result).sort((t1, t2) => (t1.position.distanceSquared(myPosition) - t2.position.distanceSquared(myPosition)))
             }
         }
-        return result
     }
     return []
 }
@@ -151,12 +147,12 @@ async function throttleRunTime(bot: RGBot) {
 
 
 // sort potions with the ones you want to use first near the front
-export const FLAG_CARRIER_POTIONS = ['Gotta Go Fast','Lava Swim']
+export const MOVEMENT_POTIONS = ['Gotta Go Fast','Lava Swim']
 export const COMBAT_POTIONS = ['Increased Damage Potion']
 export const NINJA_POTIONS = ['Poison Cloud II','Poison Cloud']
 export const HEALTH_POTIONS = ['Totem of Undying','Healing Potion','Tincture of Life','Tincture of Mending II','Tincture of Mending','Golden Apple']
 
-export type POTION_TYPE = 'flag_carrier' | 'combat' | 'ninja' | 'health'
+export type POTION_TYPE = 'movement' | 'combat' | 'ninja' | 'health'
 
 /**
  * Get a potion from bot inventory of the specified type if it exists.
@@ -167,8 +163,8 @@ export type POTION_TYPE = 'flag_carrier' | 'combat' | 'ninja' | 'health'
 function getPotionOfType(bot: RGBot, type: POTION_TYPE): Item {
     let potions = []
     switch(type) {
-        case 'flag_carrier':
-            potions = FLAG_CARRIER_POTIONS;
+        case 'movement':
+            potions = MOVEMENT_POTIONS;
             break;
         case 'combat':
             potions = COMBAT_POTIONS;
@@ -252,9 +248,9 @@ async function equipShield(bot: RGBot): Promise<boolean> {
  * Un-equip off-hand item like a shield
  * @param {RGBot} bot
  */
-async function unEquipShield(bot: RGBot) {
+async function unEquipOffHand(bot: RGBot) {
     //console.log(`[Shield] Removing from slot: ${slot}`)
     await bot.mineflayer().unequip('off-hand')
 }
 
-module.exports = {getUnbreakableBlockIds, nearestTeammates, moveTowardPosition, throttleRunTime, getPotionOfType, usePotion, usePotionOfType, nameForItem}
+module.exports = {getUnbreakableBlockIds, nearestTeammates, moveTowardPosition, throttleRunTime, getPotionOfType, usePotion, usePotionOfType, nameForItem, equipShield, unEquipOffHand}

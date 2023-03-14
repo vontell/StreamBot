@@ -150,19 +150,20 @@ export function configureBot(bot: RGBot) {
                 console.log(`My team: ${myTeamName}, my position: ${bot.vecToString(myPosition)}, my inventory: ${JSON.stringify(bot.getAllInventoryItems().map((item) => nameForItem(item)))}`)
 
                 // find any opponents in range
-                const opNames: string[] = bot.matchInfo().players.filter(player => player.team != myTeamName).map(p => p.username)
+                const opponentNames: string[] = bot.getOpponentUsernames()
                 const opponents: Entity[] = bot.findEntities({
                     // opNames can be empty in practice mode where there is no other team
                     // if we don't pass some array to match, then this will return all entities instead
-                    entityNames: (opNames.length == 0 && ['...']) || opNames,
+                    entityNames: (opponentNames.length == 0 && ['...']) || opponentNames,
                     attackable: true,
                     maxCount: 3,
                     maxDistance: 33, // Bots can only see ~30 +/1 blocks, so no need to search far
+                    // override the default value function here as we aren't using this value in the sortValueFunction
                     entityValueFunction: (entityName) => {
                         return 0
                     },
                     // just sort them by distance for now... We'll filter them by decision point later
-                    sortValueFunction: (distance, pointValue, health = 0, defense = 0, toughness = 0) => {
+                    sortValueFunction: (distance, entityValue, health = 0, defense = 0, toughness = 0) => {
                         return distance
                     }
                 }).map(fr => fr.result)
