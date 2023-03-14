@@ -303,8 +303,7 @@ export function configureBot(bot: RGBot) {
             // @ts-ignore
             // TODO: Should I let my bots run down into the tunnel for better loot ?
             // or keep them on the top only
-            // return (Math.abs(theItem.result.position.y - myPosition.y) < 5)
-            return true
+            return (Math.abs(theItem.result.position.y - myPosition.y) < 5)
         }).map(t => t.result)?.shift()
 
         if (item) {
