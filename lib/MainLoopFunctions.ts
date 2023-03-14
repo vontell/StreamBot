@@ -10,7 +10,7 @@ const {
     usePotionOfType,
     getPotionOfType,
     usePotion
-} = require('./lib/HelperFunctions')
+} = require('./HelperFunctions')
 
 
 export async function handleLowHealth(bot: RGBot, rgctfUtils: RGCTFUtils, opponents: Entity[], teamMates: Entity[]): Promise<boolean> {
