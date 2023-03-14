@@ -228,7 +228,7 @@ function nameForItem(item: Item): string {
             return json['extra'][0]['text']
         } catch (ex) {}
     }
-    return item.displayName||item.name
+    return item.displayName || item.name
 }
 
 /**
