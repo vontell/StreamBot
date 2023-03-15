@@ -20,11 +20,11 @@ function getUnbreakableBlockIds(bot: RGBot): number[] {
         blocksByName.stone_brick_wall.id,
         blocksByName.ladder.id,
         blocksByName.cracked_stone_bricks.id,
-        blocksByName.white_carpet.id,
+        blocksByName.white_wool.id,
 
         // blue castle
-        blocksByName.blue_carpet.id,
-        blocksByName.light_blue_carpet.id,
+        blocksByName.blue_wool.id,
+        blocksByName.light_blue_wool.id,
         blocksByName.blue_stained_glass_pane.id,
         blocksByName.light_blue_stained_glass_pane.id,
         blocksByName.soul_torch.id,
@@ -34,14 +34,13 @@ function getUnbreakableBlockIds(bot: RGBot): number[] {
         blocksByName.blue_glazed_terracotta.id,
 
         // red castle
-        blocksByName.red_carpet.id,
-        blocksByName.pink_carpet.id,
+        blocksByName.red_wool.id,
+        blocksByName.pink_wool.id,
         blocksByName.red_stained_glass_pane.id,
         blocksByName.pink_stained_glass_pane.id,
         blocksByName.redstone_torch.id,
         blocksByName.redstone_wall_torch.id,
         blocksByName.lantern.id,
-        blocksByName.red_wool.id,
         blocksByName.red_glazed_terracotta.id,
 
         // item spawns + flag barrier
