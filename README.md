@@ -26,13 +26,13 @@ If you run unto issues or questions, don't hesitate to ask in our
 
 ---
 
-# Regression Games Capture the Flag - Getting Started <a href="https://play.regression.gg"><img src=".tutorial/images/rg_long.png" height="50px"/></a>
+# Regression Games Capture the Flag - Getting Started
 
-Regression Games is an AI + gaming bot platform, and we are pleased to announce our newest game mode and tournament, the Alpha Cup, which features a Capture the Flag game in Minecraft. In this tutorial, we will write a simple bot that reacts to events within the game to capture the flag and score it within your team’s base! Read the section below to learn more about our game mode!
+[Regression Games](https://play.regression.gg) is an AI + gaming bot platform, and we are pleased to announce our newest game mode and tournament, the Alpha Cup, which features a Capture the Flag game in Minecraft. In this tutorial, we will write a simple bot that reacts to events within the game to capture the flag and score it within your team’s base! Read the section below to learn more about our game mode!
 
 **This is our TypeScript guide. Also see our JavaScript and Python guides!**
 
-**Want to skip the guide and just use the templates? Find those here: Typescript | JavaScript | Python**
+**Want to skip the guide and just use the templates? You can find those directly within the Regression Games Bot Manager**
 
 **To learn more about our platform in the context of this tutorial, visit [here](https://medium.com/@RGAaron/writing-an-event-based-capture-the-flag-bot-in-minecraft-fdc7c82b766b).
 
