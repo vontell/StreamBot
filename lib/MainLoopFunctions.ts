@@ -4,6 +4,7 @@ import {Item} from 'prismarine-item';
 import {Entity} from 'prismarine-entity';
 import {Vec3} from 'vec3';
 import RGCTFUtils from 'rg-ctf-utils';
+import { entireTeam } from './HelperFunctions';
 
 const {
     moveTowardPosition,
@@ -234,9 +235,9 @@ export async function handleBotIdlePosition(bot: RGBot, rgctfUtils: RGCTFUtils, 
 export async function handleTurtleMode(bot: RGBot, rgctfUtils: RGCTFUtils, opponents: Entity[], teamMates: Entity[]): Promise<boolean> {
 
     // Determine if our team has the flag
-    const myself = bot.findEntities({entityNames: [bot.username()]})?.shift().result
-    console.log(`Me: ${myself}`)
-    const teamHasFlag = teamMates.concat(myself).filter(them => {
+    const theTeam = entireTeam(bot)
+    console.log(`The team: ${theTeam.map(u => u.username)}`)
+    const teamHasFlag = theTeam.filter(them => {
         if (them.heldItem && them.heldItem.name.includes(rgctfUtils.FLAG_SUFFIX)) {
             console.log(`Player ${them.name} is holding the flag`)
             return true

@@ -90,6 +90,27 @@ function nearestTeammates (bot: RGBot, maxDistance = 99, botsOnly = true): Entit
     return []
 }
 
+export function entireTeam(bot: RGBot, maxDistance = 99, botsOnly = true): Entity[] {
+    const theMatchInfo = bot.matchInfo()
+    if (theMatchInfo) {
+        const botName = bot.username()
+        const teamName = bot.teamForPlayer(botName)
+        console.log(`Checking for any team-mates in range: ${maxDistance}`)
+        if (teamName) {
+            const teamMates = theMatchInfo.players.filter(player => player.team == teamName && (!botsOnly || player.isBot))
+            if (teamMates && teamMates.length > 0) {
+                const myPosition = bot.position()
+                return bot.findEntities({
+                    entityNames: teamMates.map(t => t.username),
+                    attackable: true,
+                    maxDistance: maxDistance
+                }).map(t => t.result).sort((t1, t2) => (t1.position.distanceSquared(myPosition) - t2.position.distanceSquared(myPosition)))
+            }
+        }
+    }
+    return []
+}
+
 let lastMovePosition: Vec3 = undefined
 
 /**
