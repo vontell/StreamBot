@@ -40,7 +40,7 @@ export async function handleAttackFlagCarrier(bot: RGBot, rgctfUtils: RGCTFUtils
     // find out if the flag is available
     const flagLocation: Vec3 = rgctfUtils.getFlagLocation()
     if (!flagLocation) {
-        console.log(`Checking ${opponents.length} opponents in range for flag carriers`)
+        //console.log(`Checking ${opponents.length} opponents in range for flag carriers`)
         // see if one of these opponents is holding the flag
         const opponentWithFlag = opponents.filter(them => {
             if (them.heldItem && them.heldItem.name.includes(rgctfUtils.FLAG_SUFFIX)) {
@@ -72,7 +72,7 @@ export async function handleAttackNearbyOpponent(bot: RGBot, rgctfUtils: RGCTFUt
         return a.position.distanceSquared(myPosition) <= (rgctfUtils.hasFlag() ? 25 : 100)
     })
 
-    console.log(`Checking ${theOpponents.length} opponents in range to murder`)
+    //console.log(`Checking ${theOpponents.length} opponents in range to murder`)
     if (theOpponents.length > 0) {
         const firstOpponent = theOpponents[0]
 
@@ -95,7 +95,7 @@ export async function handleAttackNearbyOpponent(bot: RGBot, rgctfUtils: RGCTFUt
 export async function handleScoringFlag(bot: RGBot, rgctfUtils: RGCTFUtils, opponents: Entity[], teamMates: Entity[]): Promise<boolean> {
     if( rgctfUtils.hasFlag()) {
         //TODO: Do I need to use potions ? un-equip my shield to run faster ?
-        console.log(`I have the flag, running to score`)
+        //console.log(`I have the flag, running to score`)
         const myTeamName = bot.getMyTeam()
         const myScoreLocation: Vec3 =
             myTeamName == 'BLUE' ? rgctfUtils.BLUE_SCORE_LOCATION : rgctfUtils.RED_SCORE_LOCATION
@@ -108,7 +108,7 @@ export async function handleScoringFlag(bot: RGBot, rgctfUtils: RGCTFUtils, oppo
 export async function handleCollectingFlag(bot: RGBot, rgctfUtils: RGCTFUtils, opponents: Entity[], teamMates: Entity[]): Promise<boolean> {
     const flagLocation: Vec3 = rgctfUtils.getFlagLocation()
     if (flagLocation) {
-        console.log(`Moving toward the flag at ${bot.vecToString(flagLocation)}`)
+        //console.log(`Moving toward the flag at ${bot.vecToString(flagLocation)}`)
         //TODO: Do I need to use potions ? un-equip my shield to run faster ?
         await moveTowardPosition(bot, flagLocation, 1)
         return true
@@ -141,7 +141,7 @@ export async function handlePlacingBlocks(bot: RGBot, rgctfUtils: RGCTFUtils, op
         return a.position.distanceSquared(myPosition) <= 225
     })
 
-    console.log(`Checking ${theOpponents.length} opponents in range before getting items or placing blocks`)
+    //console.log(`Checking ${theOpponents.length} opponents in range before getting items or placing blocks`)
     if (theOpponents.length == 0) {
 
         // If I have blocks to place, go place blocks at strategic locations if they aren't already filled
@@ -201,7 +201,7 @@ export async function handleLootingItems(bot: RGBot, rgctfUtils: RGCTFUtils, opp
 
     if (item) {
         // @ts-ignore
-        console.log(`Going to collect item: ${item.name} at: ${bot.vecToString(item.position)}`)
+        //console.log(`Going to collect item: ${item.name} at: ${bot.vecToString(item.position)}`)
         //TODO: Do I need to use potions ? un-equip my shield to run faster ?
 
         // @ts-ignore
@@ -217,7 +217,7 @@ export async function handleBotIdlePosition(bot: RGBot, rgctfUtils: RGCTFUtils, 
     // Do my bots spread out to key points looking for items or opponents ?
     // Do my bots group up to control key areas of the map ?
     // Do those areas of the map change dependent on where the flag currently is ?
-    console.log(`Moving toward center point: ${bot.vecToString(rgctfUtils.FLAG_SPAWN)}`)
+    //console.log(`Moving toward center point: ${bot.vecToString(rgctfUtils.FLAG_SPAWN)}`)
     await moveTowardPosition(bot, rgctfUtils.FLAG_SPAWN, 1)
     return true
 }
@@ -248,8 +248,10 @@ export async function handleTurtleMode(bot: RGBot, rgctfUtils: RGCTFUtils, oppon
 
     // Determine if we are ahead on points
     const myScore = bot.matchInfo().teams.find(t => t.name == myTeam)?.metadata.score;
-    const enemyScore = bot.matchInfo().teams.find(t => t.name != myTeam)?.metadata.score;
+    const enemyScore = bot.matchInfo().teams.find(t => t.name != myTeam)?.metadata?.score || 0;
     const teamIsAhead = myScore > enemyScore
+
+    console.log(`TURTLE STATE: hasFlag=${teamHasFlag}, isInBase=${isInBase}, teamHead=${teamIsAhead}`)
 
     if (!teamHasFlag && !teamIsAhead) {
         return false

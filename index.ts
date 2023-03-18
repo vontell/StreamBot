@@ -147,7 +147,7 @@ export function configureBot(bot: RGBot) {
 
         // get my current position and log information about my state
         const myPosition: Vec3 = bot.position()
-        console.log(`My team: ${myTeamName}, my position: ${bot.vecToString(myPosition)}, my inventory: ${JSON.stringify(bot.getAllInventoryItems().map((item) => nameForItem(item)))}`)
+        //console.log(`My team: ${myTeamName}, my position: ${bot.vecToString(myPosition)}, my inventory: ${JSON.stringify(bot.getAllInventoryItems().map((item) => nameForItem(item)))}`)
 
         // find any opponents in range
         const opponentNames: string[] = bot.getOpponentUsernames()
