@@ -235,14 +235,13 @@ export async function handleBotIdlePosition(bot: RGBot, rgctfUtils: RGCTFUtils, 
 export async function handleTurtleMode(bot: RGBot, rgctfUtils: RGCTFUtils, opponents: Entity[], teamMates: Entity[]): Promise<boolean> {
 
     // Determine if our team has the flag
-    const theTeam = entireTeam(bot)
-    console.log(`The team: ${theTeam.map(u => u.username)}`)
-    const teamHasFlag = theTeam.filter(them => {
+    const teamHasFlag = teamMates.filter(them => {
         if (them.heldItem && them.heldItem.name.includes(rgctfUtils.FLAG_SUFFIX)) {
             console.log(`Player ${them.name} is holding the flag`)
             return true
         }
-    })?.length > 0
+    })?.length > 0 || bot.inventoryContainsItem(rgctfUtils.FLAG_SUFFIX, {partialMatch: true})
+
 
     // Determine if the bot is near the base
     const myTeam = bot.getMyTeam()
