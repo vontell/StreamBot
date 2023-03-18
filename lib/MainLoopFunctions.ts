@@ -4,13 +4,13 @@ import {Item} from 'prismarine-item';
 import {Entity} from 'prismarine-entity';
 import {Vec3} from 'vec3';
 import RGCTFUtils from 'rg-ctf-utils';
-import { entireTeam } from './HelperFunctions';
 
 const {
     moveTowardPosition,
     usePotionOfType,
     getPotionOfType,
-    usePotion
+    usePotion,
+    entireTeam
 } = require('./HelperFunctions')
 
 
