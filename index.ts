@@ -81,6 +81,13 @@ export function configureBot(bot: RGBot) {
     console.log('Flag is available')
   })
 
+  let whisperedSomeoneHasFlag = false;
+
+  bot.on('whisper', (username: string, message: string) => {
+    console.log(`${username} said they have the flag`)
+    whisperedSomeoneHasFlag = true;
+  })
+
 
   // Part of using a main loop is being careful not to leave it running at the wrong time.
   // It is very easy to end up with 2 loops running by accident.
@@ -117,9 +124,6 @@ export function configureBot(bot: RGBot) {
 
     }
   })
-
-
-
 
   // You could write all the code inside this spawn listener, but we separate it out into its own mainLoop function
   bot.on('spawn', async () => {
