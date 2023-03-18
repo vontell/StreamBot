@@ -253,7 +253,7 @@ export async function handleTurtleMode(bot: RGBot, rgctfUtils: RGCTFUtils, oppon
 
     console.log(`TURTLE STATE: hasFlag=${teamHasFlag}, isInBase=${isInBase}, teamHead=${teamIsAhead}`)
 
-    if (!teamHasFlag && !teamIsAhead) {
+    if (!teamHasFlag || !teamIsAhead) {
         return false
     }
 
