@@ -262,7 +262,8 @@ export async function handleTurtleMode(bot: RGBot, rgctfUtils: RGCTFUtils, oppon
     }
 
     if (isInBase) {
-        await bot.wait(1)
+        console.log("WAITING IN BASE")
+        await bot.wait(20)
         return true;
     }
 
