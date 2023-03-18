@@ -259,7 +259,7 @@ export async function handleTurtleMode(bot: RGBot, rgctfUtils: RGCTFUtils, oppon
 
     if (!isInBase) {
         console.log("ACTIVATE TURTLE MODE")
-        await bot.approachPosition(baseLocation, {reach: 7})
+        await moveTowardPosition(bot, baseLocation, 7)
         return true;
     }
 
