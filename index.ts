@@ -83,10 +83,11 @@ export function configureBot(bot: RGBot) {
 
   let whisperedSomeoneHasFlag = false;
 
-  bot.on('whisper', (username: string, message: string) => {
-    console.log(`${username} said they have the flag`)
-    whisperedSomeoneHasFlag = true;
-  })
+  // Try to whisper to let bots know you have the flag
+  // bot.on('whisper', (username: string, message: string) => {
+  //   console.log(`${username} said they have the flag`)
+  //   whisperedSomeoneHasFlag = true;
+  // })
 
 
   // Part of using a main loop is being careful not to leave it running at the wrong time.

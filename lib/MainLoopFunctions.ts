@@ -242,11 +242,12 @@ export async function handleTurtleMode(bot: RGBot, rgctfUtils: RGCTFUtils, oppon
         }
     })?.length > 0 || bot.inventoryContainsItem(rgctfUtils.FLAG_SUFFIX, {partialMatch: true})
 
-    if (bot.inventoryContainsItem(rgctfUtils.FLAG_SUFFIX, {partialMatch: true})) {
-        teamMates.forEach(u => {
-            bot.whisper(u.username, "FLAG")
-        })
-    }
+    // TODO: See Twitch stream, timestamp 1:45 for more about this
+    // if (bot.inventoryContainsItem(rgctfUtils.FLAG_SUFFIX, {partialMatch: true})) {
+    //     teamMates.forEach(u => {
+    //         bot.whisper(u.username, "FLAG")
+    //     })
+    // }
 
     // Determine if the bot is near the base
     const myTeam = bot.getMyTeam()
