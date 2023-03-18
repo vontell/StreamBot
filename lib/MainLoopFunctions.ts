@@ -221,3 +221,51 @@ export async function handleBotIdlePosition(bot: RGBot, rgctfUtils: RGCTFUtils, 
     await moveTowardPosition(bot, rgctfUtils.FLAG_SPAWN, 1)
     return true
 }
+
+/**
+ * if the following conditions are true:
+ *  - Case 1: Our team has the flag, the bot is not in the base, and we are ahead on points
+ *  - Case 2: Our team has the flag, the bot is in the base, and we are ahead points
+ * @param bot 
+ * @param rgctfUtils 
+ * @param opponents 
+ * @param teamMates 
+ */
+export async function handleTurtleMode(bot: RGBot, rgctfUtils: RGCTFUtils, opponents: Entity[], teamMates: Entity[]): Promise<boolean> {
+
+    // Determine if our team has the flag
+    const teamHasFlag = teamMates.filter(them => {
+        if (them.heldItem && them.heldItem.name.includes(rgctfUtils.FLAG_SUFFIX)) {
+            console.log(`Player ${them.name} is holding the flag`)
+            return true
+        }
+    })?.length > 0
+
+    // Determine if the bot is near the base
+    const myTeam = bot.getMyTeam()
+    const baseLocation = myTeam == "BLUE" ? rgctfUtils.BLUE_SCORE_LOCATION : rgctfUtils.RED_SCORE_LOCATION
+    const isInBase = baseLocation.distanceTo(bot.position()) < 10
+
+    // Determine if we are ahead on points
+    const myScore = bot.matchInfo().teams.find(t => t.name == myTeam)?.metadata.score;
+    const enemyScore = bot.matchInfo().teams.find(t => t.name != myTeam)?.metadata.score;
+    const teamIsAhead = myScore > enemyScore
+
+    if (!teamHasFlag && !teamIsAhead) {
+        return false
+    }
+
+    if (!isInBase) {
+        console.log("ACTIVATE TURTLE MODE")
+        await bot.approachPosition(baseLocation, {reach: 7})
+        return true;
+    }
+
+    if (isInBase) {
+        await bot.wait(1)
+        return true;
+    }
+
+    return false;
+
+}

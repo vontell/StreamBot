@@ -10,7 +10,7 @@ import {
   handleBotIdlePosition,
   handleCollectingFlag,
   handleLootingItems, handleLowHealth,
-  handlePlacingBlocks, handleScoringFlag
+  handlePlacingBlocks, handleScoringFlag, handleTurtleMode
 } from './lib/MainLoopFunctions';
 
 const armorManager = require('mineflayer-armor-manager')
@@ -179,6 +179,8 @@ export function configureBot(bot: RGBot) {
         let didSomething: boolean = false
 
 
+        // If our ream is ahead, and we have the flag, then stay in the base
+
         if (!didSomething) {
           // Check if I'm low on health
           didSomething = await handleLowHealth(bot, rgctfUtils, opponents, teamMates)
@@ -192,6 +194,10 @@ export function configureBot(bot: RGBot) {
         if (!didSomething) {
           // do I need to attack a nearby opponent
           didSomething = await handleAttackNearbyOpponent(bot, rgctfUtils, opponents, teamMates)
+        }
+
+        if (!didSomething) {
+          didSomething = await handleTurtleMode(bot, rgctfUtils, opponents, teamMates)
         }
 
         if (!didSomething) {
