@@ -90,7 +90,7 @@ function nearestTeammates (bot: RGBot, maxDistance = 99, botsOnly = true): Entit
     return []
 }
 
-export function entireTeam(bot: RGBot, maxDistance = 99, botsOnly = true): Entity[] {
+function entireTeam(bot: RGBot, maxDistance = 99, botsOnly = true): Entity[] {
     const theMatchInfo = bot.matchInfo()
     if (theMatchInfo) {
         const botName = bot.username()
@@ -273,4 +273,4 @@ async function unEquipOffHand(bot: RGBot) {
     await bot.mineflayer().unequip('off-hand')
 }
 
-module.exports = {getUnbreakableBlockIds, nearestTeammates, moveTowardPosition, throttleRunTime, getPotionOfType, usePotion, usePotionOfType, nameForItem, equipShield, unEquipOffHand}
+module.exports = {getUnbreakableBlockIds, nearestTeammates, moveTowardPosition, throttleRunTime, getPotionOfType, usePotion, usePotionOfType, nameForItem, equipShield, unEquipOffHand, entireTeam}
